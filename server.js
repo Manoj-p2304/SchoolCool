@@ -1,52 +1,29 @@
-// const express = require('express');
-// const mongoose = require('mongoose');
-// const cors = require('cors');
-// const bodyParser = require('body-parser');
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const authRoutes = require('./src/api/auth');
 
-// const app = express();
-// const port = process.env.PORT || 5000;
+const app = express();
+const port = 5000;
 
-// app.use(cors());
-// app.use(bodyParser.json());
+app.use(cors());
+app.use(express.json());
 
-// // Connect to MongoDB
-// const MONGODB_URI = 'mongodb://localhost:27017/mydatabase'; // Replace 'mydatabase' with your MongoDB database name
-// mongoose.connect(MONGODB_URI, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
+// Connect to MongoDB Atlas
+mongoose.connect('mongodb+srv://manoj2304:pi96nZsmxXAWSrMd@cluster0.ffnbnau.mongodb.net/', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => {
+    console.log('Connected to MongoDB Atlas');
+  })
+  .catch((error) => {
+    console.error('Error connecting to MongoDB Atlas:', error);
+  });
 
-// // Create a Mongoose model for the values collection
-// const ValueSchema = new mongoose.Schema({
-//   value: {
-//     type: String,
-//     required: true,
-//   },
-// });
+// Routes
+app.use('./src/api/auth', authRoutes);
 
-// const Value = mongoose.model('Value', ValueSchema);
-
-// // Routes
-// app.post('/api/values', async (req, res) => {
-//   try {
-//     const { value } = req.body;
-//     const newValue = new Value({ value });
-//     await newValue.save();
-//     res.status(201).json({ message: 'Value added successfully', value: newValue });
-//   } catch (error) {
-//     res.status(500).json({ error: 'Something went wrong' });
-//   }
-// });
-
-// app.get('/api/values', async (req, res) => {
-//   try {
-//     const values = await Value.find();
-//     res.status(200).json(values);
-//   } catch (error) {
-//     res.status(500).json({ error: 'Something went wrong' });
-//   }
-// });
-
-// app.listen(port, () => {
-//   console.log(`Server is running on port ${port}`);
-// });
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});

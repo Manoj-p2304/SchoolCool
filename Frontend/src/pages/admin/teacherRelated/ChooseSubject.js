@@ -30,7 +30,11 @@ const ChooseSubject = ({ situation }) => {
             setTeacherID(teacherID);
             dispatch(getTeacherFreeClassSubjects(classID));
         }
+<<<<<<< HEAD
     }, [situation, params, dispatch] );
+=======
+    }, [situation]);
+>>>>>>> 6d625844fae85be42c5b9df7c8690561386cb129
 
     if (loading) {
         return <div>Loading...</div>;

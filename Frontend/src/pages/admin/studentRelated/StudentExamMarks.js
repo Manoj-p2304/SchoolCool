@@ -42,13 +42,21 @@ const StudentExamMarks = ({ situation }) => {
             dispatch(getUserDetails(studentID, "Student"));
             setChosenSubName(subjectID);
         }
+<<<<<<< HEAD
     }, [situation, params, dispatch]);
+=======
+    }, [situation]);
+>>>>>>> 6d625844fae85be42c5b9df7c8690561386cb129
 
     useEffect(() => {
         if (userDetails && userDetails.sclassName && situation === "Student") {
             dispatch(getSubjectList(userDetails.sclassName._id, "ClassSubjects"));
         }
+<<<<<<< HEAD
     });
+=======
+    }, [dispatch, userDetails]);
+>>>>>>> 6d625844fae85be42c5b9df7c8690561386cb129
 
     const changeHandler = (event) => {
         const selectedSubject = subjectsList.find(
